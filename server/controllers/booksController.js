@@ -1,10 +1,11 @@
-import { Book } from "../models/book-schema";
+import e from "express";
+import { Book } from "../models/book-schema.js";
 
 export const createBook = async (req, res) => {
   if (req.body) {
     try {
-      const book = await Book.create(req.body);
-      res.send(book);
+      await Book.create(req.body);
+      res.send({ message: "book created successfully" });
     } catch (error) {
       res.send({ error: "book was not created", message: error });
     }
@@ -13,14 +14,12 @@ export const createBook = async (req, res) => {
 
 export const getBooks = async (req, res) => {
   try {
-    const result = await Book.find({})
-      .sort([["date", -1]])
-      .exec(function (err, docs) {
-        if (docs) {
-          res.send(docs);
-        }
-      });
-    res.send(result);
+    const books = await Book.find({});
+    if (books) {
+      res.send(books);
+    } else {
+      res.send({ error: "books was not found" });
+    }
   } catch (error) {
     res.send({ error: "get books failed", message: error });
   }
