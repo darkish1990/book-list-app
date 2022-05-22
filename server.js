@@ -1,20 +1,19 @@
-import dotenv from "dotenv";
-import express from "express";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const indexRouter = require("./routes/index.js");
 
-dotenv.config({ path: "./server/.env" });
-import cors from "cors";
-import mongoose from "mongoose";
-
-import indexRouter from "./routes/index.js";
+dotenv.config({ path: "./.env" });
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.static("client/build"));
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
+app.use(express.static("public"));
 const dbUrl = process.env.MONGO_URI || "mongodb://localhost:27017/BookDB";
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 const db = mongoose.connection;

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
   author: String,
@@ -6,4 +6,5 @@ const bookSchema = new mongoose.Schema({
   id: mongoose.ObjectId,
 });
 
-export const Book = mongoose.model("Book", bookSchema);
+const Book = mongoose.model("Book", bookSchema);
+module.exports = Book;
