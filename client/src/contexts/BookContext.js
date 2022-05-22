@@ -35,7 +35,7 @@ const BookContextProvider = (props) => {
         title,
         author,
       });
-      const { data } = await axios.get("/");
+      const { data } = await axios.get("api/");
       if (data) {
         setBooks([...data]);
       }
@@ -43,16 +43,16 @@ const BookContextProvider = (props) => {
       console.log(error);
     }
   };
-  const removeBook = (id) => {
+  const removeBook = async (id) => {
     try {
-        await axios.delete(`api/${id}`);
-        const { data } = await axios.get("/");
-        if (data) {
-          setBooks([...data]);
-        }
-      } catch (error) {
-        console.log(error);
+      await axios.delete(`api/${id}`);
+      const { data } = await axios.get("api/");
+      if (data) {
+        setBooks([...data]);
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

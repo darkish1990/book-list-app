@@ -5,7 +5,7 @@ const BookDetails = ({ book }) => {
   return (
     <li
       onClick={() => {
-        removeBook(book.id);
+        removeBook(book._id);
       }}
     >
       <div className="title">{book.title}</div>
