@@ -14,7 +14,7 @@ const BookContextProvider = (props) => {
 
   const getInitialData = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/");
+      const { data } = await axios.get("/");
       if (data && data.length > 0) {
         setBooks([...data]);
         setLoading(false);
@@ -31,7 +31,7 @@ const BookContextProvider = (props) => {
 
   const addBook = async (title, author) => {
     try {
-      const { data } = await axios.post("http://localhost:4000/", {
+      const { data } = await axios.post("/", {
         title,
         author,
       });
