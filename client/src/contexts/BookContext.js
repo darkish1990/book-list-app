@@ -39,10 +39,20 @@ const BookContextProvider = (props) => {
       if (data) {
         setBooks([...data]);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const removeBook = (id) => {
-    setBooks(books.filter((book) => book.id !== id));
+    try {
+        await axios.delete(`api/${id}`);
+        const { data } = await axios.get("/");
+        if (data) {
+          setBooks([...data]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
   };
 
   return (
