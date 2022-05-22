@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static("client/build"));
 
 app.use("/", indexRouter);
 const dbUrl = process.env.MONGO_URI || "mongodb://localhost:27017/BookDB";
