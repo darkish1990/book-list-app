@@ -33,7 +33,7 @@ const BookContextProvider = (props) => {
         author,
       });
       const { data } = await axios.get("api/");
-      if (data) {
+      if (data.length > 0) {
         setBooks([...data]);
       }
     } catch (error) {
