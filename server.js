@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 const mongoose = require("mongoose");
 const indexRouter = require("./routes/index.js");
 
@@ -14,9 +15,7 @@ app.use(cors());
 
 app.use("/api", indexRouter);
 app.use(express.static("client/build"));
-app.get("*", (req, res) =>
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-);
+app.get("*", (req, res) => res.sendFile(path.resolve("public", "index.html")));
 const dbUrl = process.env.MONGO_URI || "mongodb://localhost:27017/BookDB";
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 const db = mongoose.connection;
