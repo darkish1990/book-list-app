@@ -3,13 +3,8 @@ import axios from "axios";
 
 export const BookContext = createContext();
 
-const defaultBooks = [
-  { title: " whatever book 1", author: "william shakespear", id: 1 },
-  { title: " whatever book 2", author: "terry prachet", id: 2 },
-];
-
 const BookContextProvider = (props) => {
-  const [books, setBooks] = useState(defaultBooks);
+  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getInitialData = async () => {
@@ -20,6 +15,7 @@ const BookContextProvider = (props) => {
         setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       throw new Error(error.message);
     }
   };
@@ -27,6 +23,7 @@ const BookContextProvider = (props) => {
   useEffect(() => {
     setLoading(true);
     getInitialData();
+    setLoading(false);
   }, []);
 
   const addBook = async (title, author) => {
@@ -48,7 +45,7 @@ const BookContextProvider = (props) => {
       await axios.delete(`api/${id}`);
       const { data } = await axios.get("api/");
       if (data) {
-        setBooks([...data]);
+        setBooks(() => [...data]);
       }
     } catch (error) {
       console.log(error);
