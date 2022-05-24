@@ -15,7 +15,6 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "postbuild": "rmdir /S /Q ..\\public >nul & mkdir ..\\public & xcopy build ..\\public /E 1>nul",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
